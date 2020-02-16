@@ -9,14 +9,20 @@
     "migrate-all": "sequelize db:migrate"
   },
   "dependencies": {
+    "bcrypt": "^3.0.8",
     "cookie-parser": "~1.4.4",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
+    "moment": "^2.24.0",
     "morgan": "~1.9.1",
     "nodemon": "^1.19.4",
-    "sequelize": "^5.21.1",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
     "pg": "^7.11.0",
-    "pg-hstore": "^2.3.3"
+    "pg-hstore": "^2.3.3",
+    "save": "^2.4.0",
+    "sequelize": "^5.21.1"
   }
 }
