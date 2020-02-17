@@ -1,16 +1,18 @@
-const jwtConfig = require('../config/jwtConfig');
+
 const jwt = require('jsonwebtoken');
+
 
 const generate = (userId, email) => {
 
+    let jwtConfig = require('../../../components/auth/config/jwtConfig');
 
-    const accessToken = jwt.sign({ id: userId ,email: email}, jwtConfig.accessSecret, {
-        expiresIn: accessTokenExpiresIn,
+    const accessToken = jwt.sign({ id: userId ,email: email }, jwtConfig.accessSecret, {
+        expiresIn: 36000,
     });
 
     return {
         accessToken,
-        accessTokenExpiresIn
+        accessTokenExpiresIn: 36000
     }
 
 };

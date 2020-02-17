@@ -1,5 +1,4 @@
-const userDAL = require('./userDAL');
-
 module.exports = {
-    userDAL
+    userDAL: require('./userDAL'),
+    roleDAL: require('./roleDAL')
 }

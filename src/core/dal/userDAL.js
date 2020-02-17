@@ -1,10 +1,26 @@
 
 const db = require("../../boot/models/index").sequelize;
 
+const getById = async (id) => {
+    try {
+               
+        const user = await db.query(`SELECT u.*, uc."password", p."firstName", p."lastName" FROM "Users" AS u
+                                        LEFT JOIN "UserCredentials" AS uc ON u.id = uc."userId"
+                                        LEFT JOIN "Profiles" AS p ON u.id = p."userId"
+                                    WHERE u.id = :userId`,
+        { replacements: { userId: id }, type: db.QueryTypes.SELECT });
+        
+        return user[0];
+
+    } catch (err) {
+        console.error(err);
+    }
+};
+
 const getByEmail = async (email) => {
     try {
-        
-        let user = await db.query(`SELECT u.*, uc."password", uc.salt, p."firstName", p."lastName" FROM "Users" AS u
+
+        let user = await db.query(`SELECT u.*, uc."password", p."firstName", p."lastName" FROM "Users" AS u
                                     LEFT JOIN "UserCredentials" AS uc ON u.id = uc."userId"
                                     LEFT JOIN "Profiles" AS p ON u.id = p."userId"
                                     WHERE u."userName" = :email`,
@@ -22,7 +38,7 @@ const createUser = async (user) => {
 
         user = await db.models.User.create({
             userName: user.userName,
-            registrated: new Date().toUTCString(),
+            roleId: user.roleId
         });
 
         return user;
@@ -48,8 +64,25 @@ const createProfile = async (userId, firstName, lastName) => {
     }
 };
 
+const createUserCreds = async (userId, password) => {
+    try {
+
+        let creds = await db.models.UserCredential.create({
+            userId: userId,
+            password: password
+        });
+
+        return creds;
+
+    } catch (err) {
+        console.error(err);
+    }
+};
+
 module.exports = {
+    getById,
     getByEmail,
     createUser,
-    createProfile
+    createProfile,
+    createUserCreds
 }

@@ -47,7 +47,7 @@ new LocalStrategy({
 
             }
 
-            if(password !== req.body.rePassword) {
+            if(password !== req.body.repPassword) {
 
               return done(null, false, {
                 message: errors.routeLayer.PASSPORT.PASSWORDS_ARE_NOT_EQUALS,
@@ -92,7 +92,7 @@ new LocalStrategy({
         try {
 
             if(!validators.hasValueValidator.isValid(email) 
-            || !validators.hasValueValidator.isValid(passport)) {
+            || !validators.hasValueValidator.isValid(password)) {
 
                 return done(null, false, { 
                   message: errors.routeLayer.PASSPORT.FIELDS_SHULD_BE_NOT_EMPTY 
@@ -100,19 +100,21 @@ new LocalStrategy({
 
             }
 
+            if(!password) {
+
+              return done(null, false, { 
+                message: errors.routeLayer.PASSPORT.EMPTY_PASSWORD
+               });
+
+           }
+
             let user = await repositories.userRepository.getByEmail(email);
             if(!user) {
+
                 return done(null, false, { 
                   message: errors.routeLayer.PASSPORT.INCORRECT_LOGIN_OR_PASSWORD 
                 });
-            }
-
-            if(!user.password) {
-
-               return done(null, false, { 
-                 message: errors.routeLayer.PASSPORT.EMPTY_PASSWORD
-                });
-
+                
             }
 
             if(!bcrypt.compareSync(password, user.password)) {

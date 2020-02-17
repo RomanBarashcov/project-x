@@ -5,7 +5,7 @@
  */
 
 const app = require('./src/boot/app');
-const debug = require('debug')('instyle:server');
+const debug = require('debug')('project-x:server');
 const http = require('http');
 const config = require('./src/boot/config');
 /**

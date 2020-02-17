@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-imageName=evodesk-back
+imageName=project-x-back
 cd "$(dirname "$0")"
 
 case $1 in

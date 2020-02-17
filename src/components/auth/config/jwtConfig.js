@@ -9,5 +9,6 @@ module.exports = {
     refreshSecret: config.env === "development" ? defaultDevSecret : hashGenerator.generate() + curentTime,
     registerSecret: config.env === "development" ? defaultDevSecret : hashGenerator.generate() + curentTime,
     longAccessTokenExpiress: 1296000,
-    shortAccessTokenExpiress: 86400
+    shortAccessTokenExpiress: 86400,
+    defaultDevSecret
 };

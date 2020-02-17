@@ -1,12 +1,13 @@
 {
-  "name": "instyle",
+  "name": "project-x",
   "version": "1.0.0",
   "private": true,
   "scripts": {
     "start": "node index.js",
     "debug": "nodemon --inspect index.js",
     "db-create": "sequelize db:create",
-    "migrate-all": "sequelize db:migrate"
+    "migrate-all": "sequelize db:migrate",
+    "hard-reset": "sequelize db:drop && sequelize db:create && sequelize db:migrate && sequelize db:seed:all"
   },
   "dependencies": {
     "bcrypt": "^3.0.8",
@@ -22,7 +23,8 @@
     "passport-local": "^1.0.0",
     "pg": "^7.11.0",
     "pg-hstore": "^2.3.3",
-    "save": "^2.4.0",
-    "sequelize": "^5.21.1"
+    "sequelize": "^5.21.1",
+    "sequelize-cli": "^5.5.1",
+    "cors": "^2.8.5"
   }
 }

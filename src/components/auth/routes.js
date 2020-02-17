@@ -8,8 +8,6 @@ router.post('/login', (req, res, next) => {
 
   passport.authenticate('login', async (err, user, info) => {
 
-      const rememberMe = (req.body.rememberMe === "true");
-
       if (err) {
         console.error(`error ${err}`);
       }
@@ -28,7 +26,7 @@ router.post('/login', (req, res, next) => {
 
       } else {
 
-        let result = await services.authService.login(user, rememberMe);
+        let result = await services.authService.login.execute(user);
         res.status(200).send({
           auth: true,
           user: result.user,
@@ -91,8 +89,9 @@ router.post('/registration', (req, res, next) => {
 
     } else {
 
-      let result = await services.authService.register(user, timezone);
+      let result = await services.authService.registrate.execute(user);
       res.status(200).send({
+        data: result,
         message: 'Success registration',
       });
       

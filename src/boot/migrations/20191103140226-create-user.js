@@ -34,12 +34,6 @@ module.exports = {
         }
       },
 
-      isConfirmed: {
-        allowNull: false,
-        type: Sequelize.BOOLEAN
-      }
-     
-
     });
 
   },
